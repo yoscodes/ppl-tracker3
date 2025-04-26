@@ -1,4 +1,4 @@
-import { getUser } from "../../../queries/user";
+// import { getUser } from "../../../queries/user";
 import { createClient } from "../../../utils/supabase/server";
 import { NextResponse } from "next/server";
 
