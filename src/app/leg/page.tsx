@@ -123,7 +123,7 @@ function LegPage() {
       <div className="fixed bottom-20 right-6">
         <AddButton
           category="leg"
-          supabase={createClient}
+          // supabase={createClient}
           onAdd={handleAdd}
           isSubmitting={isSubmitting} // ✅ 渡す
         />

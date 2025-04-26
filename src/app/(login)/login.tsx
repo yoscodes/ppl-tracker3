@@ -6,7 +6,7 @@ import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Loader2 } from "lucide-react";
 import { signInWithMagicLink } from "./action";
-import { use, useActionState, useState } from "react";
+import { useActionState, useState } from "react";
 import { ActionState } from "@/lib/auth/middleware";
 import { createClient } from "../../utils/supabase/client";
 import config from "../../config";
