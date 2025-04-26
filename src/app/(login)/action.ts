@@ -313,7 +313,7 @@ export const signInWithMagicLink = validatedAction(
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: `${redirectTo}?priceId=${encodeURIComponent(priceId || "")}&redirect=${encodeURIComponent("/test")}`,
+        emailRedirectTo: `${redirectTo}?priceId=${encodeURIComponent(priceId || "")}&redirect=${encodeURIComponent("/pull")}`,
       },
     });
 
@@ -339,7 +339,7 @@ export const signInWithGoogle = async (event: React.FormEvent<HTMLFormElement>) 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${redirectTo}?priceId=${encodeURIComponent(priceId || "")}&redirect=/test`,
+        redirectTo: `${redirectTo}?priceId=${encodeURIComponent(priceId || "")}&redirect=/pull`,
       },
     });
 

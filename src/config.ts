@@ -6,7 +6,7 @@ const config = {
     // アプリケーションが開発環境で実行されている場合に true
     process.env.NODE_ENV === "development"
       ? "http://localhost:3000"
-      : "https://quillminds.com", // 本番ドメインの設定
+      : "https://ppl-tracker-tkz7.vercel.app/", // 本番ドメインの設定
 };
 
 export default config;
