@@ -19,7 +19,9 @@ const CalendarView = () => {
         return;
       }
 
-      const formattedDates = data.map((d: any) => d.training_date);
+      const formattedDates = data.map(
+        (d: { training_date: string }) => d.training_date
+      );
       setDates(formattedDates);
     };
 
@@ -34,9 +36,7 @@ const CalendarView = () => {
 
     return (
       <div className="flex flex-col items-center justify-center">
-        {isHighlighted && (
-          <span className="text-blue-500">●</span>
-        )}
+        {isHighlighted && <span className="text-blue-500">●</span>}
       </div>
     );
   };
@@ -59,6 +59,3 @@ const CalendarView = () => {
 };
 
 export default CalendarView;
-
-
-

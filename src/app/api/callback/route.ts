@@ -11,9 +11,9 @@ export async function GET(request: Request) {
   const priceId = decodeURIComponent(
     requestUrl.searchParams.get("priceId") || "" // 商品の価格ID
   );
-  const discountCode = decodeURIComponent(
-    requestUrl.searchParams.get("discountCode") || "" // 割引コード
-  );
+  // const discountCode = decodeURIComponent(
+  //   requestUrl.searchParams.get("discountCode") || "" // 割引コード
+  // );
   const redirectTo = decodeURIComponent(encodedRedirectTo);
 
   // Supabase との通信
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 
   if (code) {
     await supabase.auth.exchangeCodeForSession(code); // OAuthコードをセッションに交換
-    const userData = await getUser(); // ユーザーデータの取得
+    // const userData = await getUser(); // ユーザーデータの取得
     // await getOrCreateUserAvatar(userData); // ユーザーのアバター画像の取得
   }
   // Set session cookie

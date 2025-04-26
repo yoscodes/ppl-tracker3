@@ -58,8 +58,12 @@ export default function WorkoutStats() {
           { name: "Pull", value: counts.pull },
           { name: "Leg", value: counts.leg },
         ]);
-      } catch (err: any) {
-        setError("データの取得に失敗しました。再試行してください。");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setError(`エラー: ${err.message}`);
+        } else {
+          setError("データの取得に失敗しました。再試行してください。");
+        }
       } finally {
         setLoading(false);
       }
@@ -109,12 +113,15 @@ export default function WorkoutStats() {
               label
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
             <Tooltip />
             {/* グラフに色とカテゴリー名が示される */}
-            <Legend verticalAlign="top" height={36} /> 
+            <Legend verticalAlign="top" height={36} />
           </PieChart>
         </ResponsiveContainer>
       </div>
