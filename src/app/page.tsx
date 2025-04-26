@@ -1,103 +1,172 @@
-import Image from "next/image";
+"use client";
+
+import Link from "next/link";
+import CalendarView from "./components/CalendarView";
+import RecentRecords from "./components/RecentRecords";
+import BodyPartStats from "./components/BodyPartStats";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <main className="min-h-screen bg-gray-50 px-4 py-10">
+      {/* ヘッダー */}
+      <header className="mb-12 text-center">
+        <h1 className="text-5xl font-extrabold text-gray-800 tracking-tight">
+          PPL-tracker
+        </h1>
+        <p className="text-gray-600 mt-3 text-base sm:text-lg">
+          追い込んだ分だけ、結果はついてくる。
+          <br className="sm:hidden" />
+          PPLで限界を超えよう。
+        </p>
+      </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* PPL法とは */}
+      <section className="max-w-3xl mx-auto mb-12 px-4">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          PPL法とは？
+        </h2>
+        <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-xl transition-shadow">
+          <ul className="list-disc list-inside space-y-2 text-gray-700 text-base leading-relaxed">
+            <li>PUSH（押す）、PULL（引く）、LEG（脚）で3分割</li>
+            <li>1部位あたり週2〜3回狙える、高頻度・高ボリュームな分割法</li>
+            <li>中〜上級者が筋肥大を最大化するための王道ルーティン</li>
+          </ul>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </section>
+
+      {/* ワークアウト分類 */}
+      <section className="max-w-3xl mx-auto mb-16 px-4">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center">
+          始めましょう
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          {[
+            {
+              href: "/push",
+              emoji: "💪🔥",
+              title: "Push（押す）",
+              desc: "胸・肩・三頭を徹底的に追い込む日。",
+              from: "from-pink-300",
+              to: "to-pink-400",
+            },
+            {
+              href: "/pull",
+              emoji: "🧲💥",
+              title: "Pull（引く）",
+              desc: "背中・二頭を限界まで引き倒す日。",
+              from: "from-blue-300",
+              to: "to-blue-400",
+            },
+            {
+              href: "/leg",
+              emoji: "🏃⚡️",
+              title: "Leg（脚）",
+              desc: "脚トレからは逃げられない。",
+              from: "from-green-300",
+              to: "to-green-400",
+            },
+          ].map(({ href, emoji, title, desc, from, to }) => (
+            <Link key={href} href={href} passHref>
+              <div
+                className={`bg-gradient-to-br ${from} ${to} p-6 rounded-2xl shadow 
+                transition-transform duration-200 
+                hover:scale-105 hover:shadow-lg 
+                ring-1 ring-gray-200 cursor-pointer text-center`}
+              >
+                <div className="text-5xl mb-3 animate-bounce-slow">{emoji}</div>
+                <div className="font-semibold text-gray-800 text-lg">
+                  {title}
+                </div>
+                <p className="text-sm text-gray-600 mt-1">{desc}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* 成長記録 */}
+      <section className="min-h-screen bg-gray-50 px-4 py-10">
+        <h2 className="text-2xl font-bold text-gray-800 mb-8 text-center">
+          あなたの成長記録
+        </h2>
+        <div className="space-y-12">
+          <RecentRecords />
+          <BodyPartStats />
+          <CalendarView />
+        </div>
+      </section>
+
+      {/* トレーニングTips */}
+      <section className="max-w-3xl mx-auto mb-12 px-4">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          トレーニングTips
+        </h2>
+        <div className="bg-white p-6 rounded-2xl shadow-md space-y-6">
+          {/* フォーム重視 */}
+          <div className="text-gray-700 leading-relaxed flex flex-col sm:flex-row items-start space-y-3 sm:space-x-3 sm:space-y-0">
+            <div className="text-3xl text-yellow-500">💡</div>
+            <div>
+              <strong className="text-lg">フォーム重視</strong>
+              ：重さよりも正しいフォームを優先しよう。ケガの予防にもなる。
+            </div>
+          </div>
+
+          {/* 継続がカギ */}
+          <div className="text-gray-700 leading-relaxed flex flex-col sm:flex-row items-start space-y-3 sm:space-x-3 sm:space-y-0">
+            <div className="text-3xl text-blue-500">🔁</div>
+            <div>
+              <strong className="text-lg">継続がカギ</strong>
+              ：毎回全力じゃなくてOK。継続して習慣化することが最重要！
+            </div>
+          </div>
+
+          {/* 食事もトレーニングの一部 */}
+          <div className="text-gray-700 leading-relaxed flex flex-col sm:flex-row items-start space-y-3 sm:space-x-3 sm:space-y-0">
+            <div className="text-3xl text-green-500">🍽️</div>
+            <div>
+              <strong className="text-lg">
+                食事もトレーニングの一部
+              </strong>
+              ：タンパク質と睡眠をしっかり確保。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="max-w-3xl mx-auto mb-16 px-4">
+        <h2 className="text-2xl font-semibold text-gray-700 mb-4">
+          よくある質問（FAQ）
+        </h2>
+        <div className="bg-white p-6 rounded-2xl shadow-md space-y-6">
+          <div>
+            <h3 className="font-semibold text-gray-800">
+              Q. PPLの順番はどうすればいい？
+            </h3>
+            <p className="text-gray-700 mt-1">
+              A. 一般的にはPush → Pull →
+              Legの順で、1日休んでまた繰り返します。疲労度に合わせて調整してOK。
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-800">
+              Q. 初心者でも大丈夫？
+            </h3>
+            <p className="text-gray-700 mt-1">
+              A. もちろんOK！自分のレベルに合わせて種目や重量を選びましょう。
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-gray-800">
+              Q. 毎回同じメニューでもいい？
+            </h3>
+            <p className="text-gray-700 mt-1">
+              A.
+              同じメニューでもOKですが、数週間ごとに少しずつ変化をつけるとより効果的です。
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
