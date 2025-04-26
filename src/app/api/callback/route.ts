@@ -42,10 +42,11 @@
 import { createClient } from "../../../utils/supabase/server";
 import { NextResponse } from "next/server";
 
+// Googleログイン認証が終わった後
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
   const code = requestUrl.searchParams.get("code");
-  const encodedRedirectTo = requestUrl.searchParams.get("redirect") || "/leg";
+  const encodedRedirectTo = requestUrl.searchParams.get("redirect") || "/push";
   const priceId = decodeURIComponent(
     requestUrl.searchParams.get("priceId") || ""
   );

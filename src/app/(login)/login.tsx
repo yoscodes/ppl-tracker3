@@ -10,6 +10,7 @@ import { useActionState, useState } from "react";
 import { ActionState } from "@/lib/auth/middleware";
 import { createClient } from "../../utils/supabase/client";
 import config from "../../config";
+import { AuthListener } from "./AuthListener";
 
 // デフォルトではサインインページ
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
@@ -46,6 +47,8 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
   >(signInWithMagicLink, { error: "", success: "" });
 
   return (
+    <>
+    <AuthListener />
     <div className="min-h-[100dvh]  bg-gradient-to-b from-white to-gray-50 flex items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
       <div className="w-full max-w-md mb-10">
         {/* <div className="flex justify-center">
@@ -169,5 +172,6 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
