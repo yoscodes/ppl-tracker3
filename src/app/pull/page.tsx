@@ -13,7 +13,7 @@ function PullPage() {
   const [records, setRecords] = useState<Record[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false); // ✅ 追加
-  const router = useRouter();
+  // const router = useRouter();
   const user = useUser();
 
   const getRecords = async () => {
