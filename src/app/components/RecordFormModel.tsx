@@ -86,10 +86,10 @@ const RecordFormModal = ({ open, onClose, onSubmit, categories }: Props) => {
     });
   };
 
-  const weightOptions = Array.from(
-    { length: (200 - 5) / 5 + 1 },
-    (_, i) => 5 + i * 5
-  );
+  // const weightOptions = Array.from(
+  //   { length: (200 - 5) / 5 + 1 },
+  //   (_, i) => 5 + i * 5
+  // );
 
   useEffect(() => {
     if (open) {
@@ -128,41 +128,6 @@ const RecordFormModal = ({ open, onClose, onSubmit, categories }: Props) => {
             </MenuItem>
           ))}
         </TextField>
-
-        {/* {[0, 1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="flex space-x-2 items-end">
-            <TextField
-              label={`セット${i + 1} 重量 (kg)`}
-              select
-              fullWidth
-              value={weights[i]}
-              onChange={(e) => handleWeightChange(i, e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            >
-              <MenuItem value={0}>加重なし</MenuItem>
-              {weightOptions.map((weight) => (
-                <MenuItem key={weight} value={weight}>
-                  {weight} kg
-                </MenuItem>
-              ))}
-            </TextField>
-
-            <TextField
-              label={`セット${i + 1} 回数`}
-              select
-              fullWidth
-              value={reps[i]}
-              onChange={(e) => handleRepsChange(i, e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            >
-              {Array.from({ length: 30 }, (_, j) => j + 1).map((rep) => (
-                <MenuItem key={rep} value={rep}>
-                  {rep} 回
-                </MenuItem>
-              ))}
-            </TextField>
-          </div>
-        ))} */}
 
         {[0, 1, 2, 3, 4, 5].map((i) => (
           <div key={i} className="flex space-x-2 items-end">

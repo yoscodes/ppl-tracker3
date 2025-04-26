@@ -41,14 +41,6 @@ const CalendarView = () => {
     );
   };
 
-  // const tileClassName = ({ date, view }: { date: Date; view: string }) => {
-  //   // 月ビューのみ適用（他ビューで崩れないように）
-  //   if (view !== "month") return "";
-
-  //   const dateStr = date.toISOString().split("T")[0];
-  //   return dates.includes(dateStr) ? "highlight-day" : "";
-  // };
-
   return (
     <div className="bg-white max-w-3xl mx-auto p-4 rounded-2xl shadow-md mt-10 mb-8">
       <div className="text-center">
@@ -67,3 +59,6 @@ const CalendarView = () => {
 };
 
 export default CalendarView;
+
+
+

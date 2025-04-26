@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import RecordList from "../components/RecordList";
 import { Record } from "@/utils/interface";
 import { createClient } from "@/utils/supabase/client";
