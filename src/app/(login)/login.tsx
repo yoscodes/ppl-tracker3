@@ -32,7 +32,7 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
           priceId || ""
         )}&discountCode=${encodeURIComponent(
           discountCode || ""
-        )}&redirect=${encodeURIComponent("/test")}`, // なにもない場合リダイレクト
+        )}&redirect=${encodeURIComponent("/")}`, // なにもない場合リダイレクト
       },
     });
     setLoading(false);
