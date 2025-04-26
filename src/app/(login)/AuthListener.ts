@@ -8,7 +8,7 @@ export function AuthListener() {
     const supabase = createClient();
 
     const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
+      (event) => {
         if (event === "SIGNED_IN") {
           // ログイン成功したらリダイレクト
           window.location.href = "/leg"; // ← 好きなページに変えてOK
