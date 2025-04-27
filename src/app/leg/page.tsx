@@ -12,9 +12,20 @@ import { deleteRecord } from "../utils/supabaseFunctions";
 function LegPage() {
   const [records, setRecords] = useState<Record[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ 追加
-  // const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const user = useUser();
+
+  // 🔥 ここで一度だけリロードさせる
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hasReloaded = sessionStorage.getItem("hasReloaded-leg");
+
+      if (!hasReloaded) {
+        sessionStorage.setItem("hasReloaded-leg", "true");
+        window.location.reload();
+      }
+    }
+  }, []);
 
   const getRecords = async () => {
     if (!user) return;
@@ -26,7 +37,7 @@ function LegPage() {
       .select("*")
       .eq("user_id", user.id)
       .eq("category", "leg")
-      .order("training_date", { ascending: false }); // 日付降順
+      .order("training_date", { ascending: false });
 
     if (error) {
       console.error("データ取得エラー:", error.message);
@@ -44,28 +55,13 @@ function LegPage() {
     }
   }, [user]);
 
-  const handleAdd = async (formData: {
-    category: string;
-    date: string;
-    weight1: number;
-    reps1: number;
-    weight2?: number;
-    reps2?: number;
-    weight3?: number;
-    reps3?: number;
-    weight4?: number;
-    reps4?: number;
-    weight5?: number;
-    reps5?: number;
-    weight6?: number;
-    reps6?: number;
-  }) => {
+  const handleAdd = async (formData: any) => {
     if (!user) {
       alert("ユーザーがログインしていません");
       return;
     }
 
-    setIsSubmitting(true); // ✅ 登録中状態にセット
+    setIsSubmitting(true);
     try {
       const { error } = await createClient()
         .from("records")
@@ -97,9 +93,9 @@ function LegPage() {
         return;
       }
 
-      await getRecords(); // 新しいデータを取得してリストを更新
+      await getRecords();
     } finally {
-      setIsSubmitting(false); // ✅ 終了後に解除
+      setIsSubmitting(false);
     }
   };
 
@@ -123,9 +119,8 @@ function LegPage() {
       <div className="fixed bottom-20 right-6">
         <AddButton
           category="leg"
-          // supabase={createClient}
           onAdd={handleAdd}
-          isSubmitting={isSubmitting} // ✅ 渡す
+          isSubmitting={isSubmitting}
         />
       </div>
     </div>
