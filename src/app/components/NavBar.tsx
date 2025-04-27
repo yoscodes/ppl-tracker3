@@ -14,8 +14,17 @@ export default function NavBar() {
     { label: "Leg", path: "/leg", icon: <FaRunning className="w-5 h-5" /> },
   ];
 
+  // const handleClick = (path: string) => {
+  //   router.push(path);
+  // };
+
   const handleClick = (path: string) => {
-    router.push(path);
+    // 現在のページが選ばれた場合、リロードを実行
+    if (pathname === path) {
+      window.location.reload();
+    } else {
+      router.push(path); // 他のページに遷移
+    }
   };
 
   return (
