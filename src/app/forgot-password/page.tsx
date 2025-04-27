@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { forgotPassword } from "./action";
@@ -30,13 +30,6 @@ import { forgotPassword } from "./action";
 const formSchema = z.object({
   email: z.string().email(),
 });
-
-// Suspense Boundary for useSearchParams
-const SuspenseBoundary = () => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <ForgotPassword />
-  </Suspense>
-);
 
 export default function ForgotPassword() {
   const searchParams = useSearchParams();
@@ -137,5 +130,3 @@ export default function ForgotPassword() {
     </main>
   );
 }
-
-export { SuspenseBoundary };
