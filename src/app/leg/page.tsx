@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
 import RecordList from "../components/RecordList";
@@ -8,6 +6,24 @@ import { createClient } from "../utils/supabase/client";
 import AddButton from "../components/AddButton";
 import { useUser } from "@supabase/auth-helpers-react";
 import { deleteRecord } from "../utils/supabaseFunctions";
+
+// formData の型定義
+interface FormData {
+  category: string;
+  date: string;
+  weight1: number;
+  reps1: number;
+  weight2?: number;
+  reps2?: number;
+  weight3?: number;
+  reps3?: number;
+  weight4?: number;
+  reps4?: number;
+  weight5?: number;
+  reps5?: number;
+  weight6?: number;
+  reps6?: number;
+}
 
 function LegPage() {
   const [records, setRecords] = useState<Record[]>([]);
@@ -55,7 +71,7 @@ function LegPage() {
     }
   }, [user]);
 
-  const handleAdd = async (formData: any) => {
+  const handleAdd = async (formData: FormData) => {
     if (!user) {
       alert("ユーザーがログインしていません");
       return;
