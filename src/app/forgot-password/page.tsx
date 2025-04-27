@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { forgotPassword } from "./action";
@@ -30,6 +30,13 @@ import { forgotPassword } from "./action";
 const formSchema = z.object({
   email: z.string().email(),
 });
+
+// SuspenseBoundary component
+const SuspenseBoundary = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ForgotPassword />
+  </Suspense>
+);
 
 export default function ForgotPassword() {
   const searchParams = useSearchParams();
@@ -62,11 +69,14 @@ export default function ForgotPassword() {
         router.push("/forgot-password/confirmation");
       }
     } catch {
-      setServerError("予期しないエラーが発生しました。もう一度お試しください。");
+      setServerError(
+        "予期しないエラーが発生しました。もう一度お試しください。"
+      );
     } finally {
       setIsLoading(false); // Set loading to false when submission ends
     }
   };
+
   return (
     <main className="flex justify-center items-center min-h-screen">
       <Card className="w-[380px]">
@@ -98,7 +108,6 @@ export default function ForgotPassword() {
               {serverError && (
                 <p className="text-red-500 text-sm mt-2">{serverError}</p>
               )}
-              {/* <Button type="submit">Register</Button> */}
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? (
                   <>
@@ -130,3 +139,5 @@ export default function ForgotPassword() {
     </main>
   );
 }
+
+export { SuspenseBoundary };

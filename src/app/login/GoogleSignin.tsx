@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 import { createClient } from "../utils/supabase/client";
@@ -9,12 +9,18 @@ import { toast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
 
+// SuspenseBoundary component
+const SuspenseBoundary = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <GoogleSignin />
+  </Suspense>
+);
+
 export default function GoogleSignin() {
   const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
   const supabase = createClient();
 
   const searchParams = useSearchParams();
-
   const next = searchParams.get("next");
 
   async function signInWithGoogle() {
@@ -32,7 +38,7 @@ export default function GoogleSignin() {
       if (error) {
         throw error;
       }
-    } catch  {
+    } catch {
       toast({
         title: "もう一度試してください。",
         description: "Google でのログイン中にエラーが発生しました。",
@@ -64,3 +70,5 @@ export default function GoogleSignin() {
     </Button>
   );
 }
+
+export { SuspenseBoundary };
