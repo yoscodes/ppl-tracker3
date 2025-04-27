@@ -22,7 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { forgotPassword } from "./action";
@@ -31,12 +31,19 @@ const formSchema = z.object({
   email: z.string().email(),
 });
 
+// Suspense Boundary for useSearchParams
+const SuspenseBoundary = () => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <ForgotPassword />
+  </Suspense>
+);
+
 export default function ForgotPassword() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const [serverError, setServerError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -47,7 +54,7 @@ export default function ForgotPassword() {
 
   const handleSubmit = async (data: z.infer<typeof formSchema>) => {
     setServerError(null);
-    setIsLoading(true); // Set loading to true when submission starts
+    setIsLoading(true);
 
     try {
       const response = await forgotPassword({
@@ -57,7 +64,6 @@ export default function ForgotPassword() {
       if (response.error) {
         setServerError(response.message);
       } else {
-        // Redirect to the confirmation page
         router.push("/forgot-password/confirmation");
       }
     } catch {
@@ -65,7 +71,7 @@ export default function ForgotPassword() {
         "予期しないエラーが発生しました。もう一度お試しください。"
       );
     } finally {
-      setIsLoading(false); // Set loading to false when submission ends
+      setIsLoading(false);
     }
   };
 
@@ -131,3 +137,5 @@ export default function ForgotPassword() {
     </main>
   );
 }
+
+export { SuspenseBoundary };
