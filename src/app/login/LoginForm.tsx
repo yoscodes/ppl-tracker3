@@ -215,11 +215,13 @@ export default function LoginForm() {
       if (response.error) {
         setServerError(response.message);
       } else {
-        // Redirect to the dashboard page
-        router.push("/dashboard");
+        // ログイン成功後リダイレクト先;
+        router.push("/leg");
       }
     } catch {
-      setServerError("予期しないエラーが発生しました。もう一度お試しください。");
+      setServerError(
+        "予期しないエラーが発生しました。もう一度お試しください。"
+      );
     } finally {
       setIsLoading(false); // Set loading to false when submission ends
     }
