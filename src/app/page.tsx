@@ -4,8 +4,25 @@ import Link from "next/link";
 import CalendarView from "./components/CalendarView";
 import RecentRecords from "./components/RecentRecords";
 import BodyPartStats from "./components/BodyPartStats";
+import { useUser } from "@supabase/auth-helpers-react";
+import { useEffect } from "react";
 
 export default function Home() {
+  const user = useUser();
+
+  // 🔥 ログイン後にリロードを1回だけ実行
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hasReloaded = sessionStorage.getItem("hasReloaded-home");
+
+      if (user && !hasReloaded) {
+        // ログインしている場合にのみリロードを実行
+        sessionStorage.setItem("hasReloaded-home", "true");
+        window.location.reload();
+      }
+    }
+  }, [user]); // `user` が変更された際にリロード判定を実行
+
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10">
       {/* ヘッダー */}
