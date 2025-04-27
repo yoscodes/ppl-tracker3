@@ -62,7 +62,7 @@ export default function ResetPassword() {
         // Redirect to the confirmation page
         router.push("/leg");
       }
-    } catch (error) {
+    } catch {
       setServerError(
         "予期しないエラーが発生しました。もう一度お試しください。"
       );

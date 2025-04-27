@@ -61,7 +61,7 @@ export default function ForgotPassword() {
         // Redirect to the dashboard page
         router.push("/forgot-password/confirmation");
       }
-    } catch (error) {
+    } catch {
       setServerError("予期しないエラーが発生しました。もう一度お試しください。");
     } finally {
       setIsLoading(false); // Set loading to false when submission ends

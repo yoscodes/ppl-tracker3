@@ -32,7 +32,7 @@ export default function GoogleSignin() {
       if (error) {
         throw error;
       }
-    } catch (error) {
+    } catch  {
       toast({
         title: "もう一度試してください。",
         description: "Google でのログイン中にエラーが発生しました。",

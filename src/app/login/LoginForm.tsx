@@ -218,7 +218,7 @@ export default function LoginForm() {
         // Redirect to the dashboard page
         router.push("/dashboard");
       }
-    } catch (error) {
+    } catch {
       setServerError("予期しないエラーが発生しました。もう一度お試しください。");
     } finally {
       setIsLoading(false); // Set loading to false when submission ends
