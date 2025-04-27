@@ -83,15 +83,17 @@ export default function Register() {
         router.push("/register/confirmation");
       }
     } catch {
-      setServerError("予期しないエラーが発生しました。もう一度お試しください。");
+      setServerError(
+        "予期しないエラーが発生しました。もう一度お試しください。"
+      );
     } finally {
       setIsLoading(false); // Set loading to false when submission ends
     }
   };
 
   return (
-    <main className="flex justify-center items-center min-h-screen">
-      <Card className="w-[380px]">
+    <main className="flex justify-center items-center min-h-screen overflow-hidden">
+      <Card className="w-full max-w-[380px]">
         <CardHeader>
           <CardTitle>新規登録</CardTitle>
           <CardDescription>新しいアカウントを登録する</CardDescription>
@@ -144,7 +146,6 @@ export default function Register() {
               {serverError && (
                 <p className="text-red-500 text-sm mt-2">{serverError}</p>
               )}
-              {/* <Button type="submit">Register</Button> */}
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? (
                   <>

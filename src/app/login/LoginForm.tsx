@@ -216,7 +216,7 @@ export default function LoginForm() {
         setServerError(response.message);
       } else {
         // ログイン成功後リダイレクト先;
-        router.push("/leg");
+        router.push("/");
       }
     } catch {
       setServerError(
@@ -229,10 +229,9 @@ export default function LoginForm() {
 
   // pass the email value to forget password page
   const email = form.getValues("email");
-
   return (
-    <main className="flex justify-center items-center min-h-screen">
-      <Card className="w-[380px]">
+    <main className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
+      <Card className="w-full max-w-[380px] text-center">
         <CardHeader>
           <CardTitle>ログイン</CardTitle>
           <CardDescription>アカウントにログインします</CardDescription>
@@ -272,7 +271,6 @@ export default function LoginForm() {
               {serverError && (
                 <p className="text-red-500 text-sm mt-2">{serverError}</p>
               )}
-              {/* <Button type="submit">Register</Button> */}
               <Button type="submit" disabled={isLoading}>
                 {isLoading ? (
                   <>

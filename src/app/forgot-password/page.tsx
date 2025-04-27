@@ -68,10 +68,9 @@ function ForgotPasswordInner() {
       setIsLoading(false);
     }
   };
-
   return (
-    <main className="flex justify-center items-center min-h-screen">
-      <Card className="w-[380px]">
+    <main className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
+      <Card className="w-full max-w-[380px]">
         <CardHeader>
           <CardTitle>パスワードのリセット</CardTitle>
           <CardDescription>
