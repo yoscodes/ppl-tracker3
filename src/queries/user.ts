@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "../utils/supabase/server";
+import { createClient } from "../app/utils/supabase/server";
 // ログインユーザーの情報を取得
 export const getUser = async () => {
   const supabase = await createClient();

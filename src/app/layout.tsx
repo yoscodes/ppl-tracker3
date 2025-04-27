@@ -4,7 +4,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
-import { createBrowserClient } from "@/utils/supabase/client";
+import { createBrowserClient } from "../app/utils/supabase/client";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
 import { useState } from "react";
 

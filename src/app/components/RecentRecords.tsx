@@ -2,9 +2,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "../utils/supabase/client";
 import { useUser } from "@supabase/auth-helpers-react";
-import { Record } from "@/utils/interface";
+import { Record } from "../utils/interface";
 
 export default function RecentRecords() {
   const user = useUser();

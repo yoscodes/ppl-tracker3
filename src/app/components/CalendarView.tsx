@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "../utils/supabase/client";
 
 const CalendarView = () => {
   const [dates, setDates] = useState<string[]>([]);

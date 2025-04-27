@@ -1,6 +1,6 @@
 "use client";
 
-import { Record } from "@/utils/interface";
+import { Record } from "../utils/interface";
 import DeleteIcon from "@mui/icons-material/Delete"; // アイコンをインポート
 
 type Props = {

@@ -3,11 +3,11 @@
 import React, { useEffect, useState } from "react";
 // import { useRouter } from "next/navigation";
 import RecordList from "../components/RecordList";
-import { Record } from "@/utils/interface";
-import { createClient } from "@/utils/supabase/client";
+import { Record } from "../utils/interface";
+import { createClient } from "../utils/supabase/client";
 import AddButton from "../components/AddButton";
 import { useUser } from "@supabase/auth-helpers-react";
-import { deleteRecord } from "@/utils/supabaseFunctions";
+import { deleteRecord } from "../utils/supabaseFunctions";
 
 function PushPage() {
   const [records, setRecords] = useState<Record[]>([]);

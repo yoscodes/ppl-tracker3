@@ -33,7 +33,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isProtected && !user) {
-    const redirectUrl = new URL("/sign-in", request.url); // 未ログインだったら	/sign-inにリダイレクトする
+    const redirectUrl = new URL("/login", request.url); // 未ログインだったら	/sign-inにリダイレクトする
     redirectUrl.searchParams.set("redirect", url.pathname); // 元のパスへ戻すため
     return NextResponse.redirect(redirectUrl);
   }
