@@ -14,7 +14,7 @@ import { AuthListener } from "./AuthListener";
 
 // デフォルトではサインインページ
 export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
   const priceId = searchParams.get("priceId");
@@ -22,22 +22,27 @@ export function Login({ mode = "signin" }: { mode?: "signin" | "signup" }) {
 
   //  Google サインインの処理
   const handleGoogleSignIn = () => {
-    // ログイン成功後"/"にリダイレクト
-    const redirectTo = `${config.domainName}/`;
-    setLoading(true);
     const supabase = createClient();
+    const searchParams = new URLSearchParams(window.location.search);
+  
+    // URLの?redirect=/pushみたいなのを取る
+    const redirect = searchParams.get("redirect") || "/leg"; // なかったら/leg
+    const priceId = searchParams.get("priceId") || "";
+    const discountCode = searchParams.get("discountCode") || "";
+  
+    // 最終的にログイン成功後、redirect先に飛ばす
+    const redirectTo = `${config.domainName}/?redirect=${encodeURIComponent(
+      redirect
+    )}&priceId=${encodeURIComponent(priceId)}&discountCode=${encodeURIComponent(discountCode)}`;
+  
     supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${redirectTo}?priceId=${encodeURIComponent(
-          priceId || ""
-        )}&discountCode=${encodeURIComponent(
-          discountCode || ""
-        )}&redirect=${encodeURIComponent("/")}`, // なにもない場合リダイレクト
+        redirectTo,
       },
     });
-    setLoading(false);
   };
+  
 
   // useActionState() はメール送信処理とその状態（成功/失敗）を管理。
   // MagicLink認証でメールアドレス二リンクが送られクリックするとログイン可能、パスワード不要

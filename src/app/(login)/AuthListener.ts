@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { createClient } from "../../utils/supabase/client"; // すでに使ってるやつ
+import { createClient } from "../../utils/supabase/client"; // いつものsupabase client
 
 export function AuthListener() {
   useEffect(() => {
@@ -10,17 +10,21 @@ export function AuthListener() {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event) => {
         if (event === "SIGNED_IN") {
-          // ログイン成功したらリダイレクト
-          window.location.href = "/leg"; // ← 好きなページに変えてOK
+          // URLのクエリパラメータから redirect を取る
+          const params = new URLSearchParams(window.location.search);
+          const redirect = params.get("redirect");
+
+          // redirectパラメータがあればそこに、なければデフォルトで /leg に飛ばす
+          window.location.href = redirect || "/leg";
         }
       }
     );
 
-    // コンポーネントが消えたらリスナーも解除する
+    // コンポーネントが消えたらリスナーも解除
     return () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
 
-  return null; // 見た目には何も出さないコンポーネント
+  return null;
 }
