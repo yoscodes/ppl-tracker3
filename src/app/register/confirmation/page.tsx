@@ -9,7 +9,7 @@ import { Mail } from "lucide-react";
 export default function RegistrationConfirmation() {
   return (
     <main className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-[540px] text-center">
+      <Card className="w-[380px] text-center">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">メールを確認してください</CardTitle>
         </CardHeader>
