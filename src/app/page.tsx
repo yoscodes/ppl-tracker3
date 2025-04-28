@@ -6,22 +6,23 @@ import RecentRecords from "./components/RecentRecords";
 import BodyPartStats from "./components/BodyPartStats";
 import { useUser } from "@supabase/auth-helpers-react";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const user = useUser();
+  const router = useRouter(); // 追加！
 
-  // 🔥 ログイン後にリロードを1回だけ実行
+  // 🔥 ログイン後に1回だけrefreshを実行
   useEffect(() => {
     if (typeof window !== "undefined") {
       const hasReloaded = sessionStorage.getItem("hasReloaded-home");
 
       if (user && !hasReloaded) {
-        // ログインしている場合にのみリロードを実行
         sessionStorage.setItem("hasReloaded-home", "true");
-        window.location.reload();
+        router.refresh(); // 修正！リロードじゃなくrefreshに
       }
     }
-  }, [user]); // `user` が変更された際にリロード判定を実行
+  }, [user, router]); // `router` も依存に入れると安全（Next公式推奨）
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10">
@@ -141,9 +142,7 @@ export default function Home() {
           <div className="text-gray-700 leading-relaxed flex flex-col sm:flex-row items-start space-y-3 sm:space-x-3 sm:space-y-0">
             <div className="text-3xl text-green-500">🍽️</div>
             <div>
-              <strong className="text-lg">
-                食事もトレーニングの一部
-              </strong>
+              <strong className="text-lg">食事もトレーニングの一部</strong>
               ：タンパク質と睡眠をしっかり確保。
             </div>
           </div>
