@@ -126,7 +126,7 @@ function LegPage() {
           あなたの成功の第一歩を踏み出しましょう！
         </p>
         <p className="text-lg text-gray-600 mb-8 text-center sm:text-xl">
-          ログインして、すぐに始めましょう。目標に向かって進む準備はできていますか？
+          目標に向かって進む準備はできていますか？
         </p>
         <Button
           variant="contained" // ボタンのデザイン
@@ -152,7 +152,7 @@ function LegPage() {
             maxWidth: "400px", // 最大幅を設定
           }}
         >
-          ログイン
+          準備できた！
         </Button>
       </div>
     );
