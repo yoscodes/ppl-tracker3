@@ -93,7 +93,7 @@ export default function Register() {
 
   return (
     <main className="flex justify-center items-center min-h-screen overflow-hidden">
-      <Card className="w-full max-w-[380px]">
+      <Card className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px]">
         <CardHeader>
           <CardTitle>新規登録</CardTitle>
           <CardDescription>新しいアカウントを登録する</CardDescription>

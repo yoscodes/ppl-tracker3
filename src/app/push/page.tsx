@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { useRouter } from "next/navigation";
 import RecordList from "../components/RecordList";
 import { Record } from "../utils/interface";
 import { createClient } from "../utils/supabase/client";
@@ -12,8 +11,7 @@ import { deleteRecord } from "../utils/supabaseFunctions";
 function PushPage() {
   const [records, setRecords] = useState<Record[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isSubmitting, setIsSubmitting] = useState(false); // ✅ 追加
-  // const router = useRouter();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const user = useUser();
 
   const getRecords = async () => {
@@ -42,7 +40,7 @@ function PushPage() {
     if (user) {
       getRecords();
     }
-  }, [user]);
+  }, [user]); // userが変わったときに再度データを取得
 
   const handleAdd = async (formData: {
     category: string;
@@ -65,7 +63,7 @@ function PushPage() {
       return;
     }
 
-    setIsSubmitting(true); // ✅ 登録中状態にセット
+    setIsSubmitting(true);
     try {
       const { error } = await createClient()
         .from("records")
@@ -97,9 +95,9 @@ function PushPage() {
         return;
       }
 
-      await getRecords(); // 新しいデータを取得してリストを更新
+      await getRecords();
     } finally {
-      setIsSubmitting(false); // ✅ 終了後に解除
+      setIsSubmitting(false);
     }
   };
 
@@ -112,6 +110,13 @@ function PushPage() {
     }
   };
 
+  // ログインしていない状態で読み込み中のメッセージを表示しないように変更
+  if (loading && !user) {
+    return (
+      <p>ログインしてください。ログインできない場合はリロードしてください。</p>
+    );
+  }
+
   return (
     <div className="p-6 pb-15">
       <h1 className="text-lg font-bold mb-4">Push種目</h1>
@@ -123,9 +128,8 @@ function PushPage() {
       <div className="fixed bottom-20 right-6">
         <AddButton
           category="push"
-          // supabase={createClient}
           onAdd={handleAdd}
-          isSubmitting={isSubmitting} // ✅ 渡す
+          isSubmitting={isSubmitting}
         />
       </div>
     </div>

@@ -14,15 +14,10 @@ export default function Home() {
 
   // 🔥 ログイン後に1回だけrefreshを実行
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hasReloaded = sessionStorage.getItem("hasReloaded-home");
-
-      if (user && !hasReloaded) {
-        sessionStorage.setItem("hasReloaded-home", "true");
-        router.refresh(); // 修正！リロードじゃなくrefreshに
-      }
+    if (user) {
+      router.refresh(); // ログイン後に画面再描画してセッション取り直し
     }
-  }, [user, router]); // `router` も依存に入れると安全（Next公式推奨）
+  }, [user]);
 
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10">

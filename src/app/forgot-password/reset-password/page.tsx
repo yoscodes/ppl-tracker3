@@ -73,9 +73,11 @@ export default function ResetPassword() {
 
   return (
     <main className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
-      <Card className="w-full max-w-[380px]">
+      <Card className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px]">
         <CardHeader>
-          <CardTitle>パスワードのリセット</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            パスワードのリセット
+          </CardTitle>
           <CardDescription>
             パスワードを更新するには新しいパスワードを入力してください
           </CardDescription>
@@ -122,7 +124,7 @@ export default function ResetPassword() {
                     お待ちください
                   </>
                 ) : (
-                  "Submit"
+                  "送信"
                 )}
               </Button>
             </form>

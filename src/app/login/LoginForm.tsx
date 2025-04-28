@@ -216,7 +216,7 @@ export default function LoginForm() {
         setServerError(response.message);
       } else {
         // ログイン成功後リダイレクト先;
-        router.push("/");
+        router.push("/leg");
       }
     } catch {
       setServerError(
@@ -231,9 +231,9 @@ export default function LoginForm() {
   const email = form.getValues("email");
   return (
     <main className="flex justify-center items-center min-h-screen bg-gray-100 overflow-hidden">
-      <Card className="w-full max-w-[380px] text-center">
+      <Card className="w-full max-w-[320px] sm:max-w-[380px] md:max-w-[420px] text-center">
         <CardHeader>
-          <CardTitle>ログイン</CardTitle>
+          <CardTitle className="text-2xl font-bold">ログイン</CardTitle>
           <CardDescription>アカウントにログインします</CardDescription>
         </CardHeader>
         <CardContent>
