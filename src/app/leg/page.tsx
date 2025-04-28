@@ -15,7 +15,7 @@ function LegPage() {
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const user = useUser();
-  const router = useRouter(); // useRouterを利用
+  // const router = useRouter(); // useRouterを利用
 
   const getRecords = async () => {
     if (!user) return;
