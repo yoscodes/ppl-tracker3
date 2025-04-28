@@ -7,7 +7,7 @@ import { createClient } from "../utils/supabase/client";
 import AddButton from "../components/AddButton";
 import { useUser } from "@supabase/auth-helpers-react";
 import { deleteRecord } from "../utils/supabaseFunctions";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { Button } from "@mui/material";
 
 function LegPage() {
