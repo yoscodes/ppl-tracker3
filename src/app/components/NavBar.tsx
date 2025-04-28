@@ -21,7 +21,8 @@ export default function NavBar() {
   const handleClick = (path: string) => {
     // 現在のページが選ばれた場合、リロードを実行
     if (pathname === path) {
-      window.location.reload();
+      // window.location.reload();
+      router.refresh(); // 👈 ここでリロードではなく refresh！
     } else {
       router.push(path); // 他のページに遷移
     }
