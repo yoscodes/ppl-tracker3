@@ -7,12 +7,15 @@ import { createClient } from "../utils/supabase/client";
 import AddButton from "../components/AddButton";
 import { useUser } from "@supabase/auth-helpers-react";
 import { deleteRecord } from "../utils/supabaseFunctions";
+// import { useRouter } from "next/navigation";
+import { Button } from "@mui/material";
 
 function PushPage() {
   const [records, setRecords] = useState<Record[]>([]);
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const user = useUser();
+  // const router = useRouter(); // useRouterを利用
 
   const getRecords = async () => {
     if (!user) return;
@@ -110,10 +113,48 @@ function PushPage() {
     }
   };
 
+  // ページのリロード処理
+  const handleReload = () => {
+    window.location.reload(); // 強制的にページをリロード
+  };
+
   // ログインしていない状態で読み込み中のメッセージを表示しないように変更
   if (loading && !user) {
     return (
-      <p>ログインしてください。ログインできない場合はリロードしてください。</p>
+      <div className="flex justify-center items-center min-h-screen flex-col p-4">
+        <p className="text-2xl font-bold text-gray-800 mb-4 text-center sm:text-3xl">
+          あなたの成功の第一歩を踏み出しましょう！
+        </p>
+        <p className="text-lg text-gray-600 mb-8 text-center sm:text-xl">
+          目標に向かって進む準備はできていますか？
+        </p>
+        <Button
+          variant="contained" // ボタンのデザイン
+          onClick={handleReload}
+          sx={{
+            backgroundColor: "	#F58220", // グリーンでポジティブな印象
+            color: "white",
+            padding: "12px 24px",
+            fontSize: "18px",
+            fontWeight: "bold",
+            borderRadius: "8px", // 丸みをつけて柔らかい印象に
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // 軽い影をつけて浮き上がる感じ
+            transition: "all 0.3s ease",
+            "&:hover": {
+              backgroundColor: "#E15A28", // ホバー時に色を少し変化
+              transform: "scale(1.05)", // ホバー時に少し大きくなる
+              boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // ホバー時に影を強く
+            },
+            "&:active": {
+              transform: "scale(1)", // クリック時に元の大きさに戻る
+            },
+            width: "100%", // ボタンが親の幅いっぱいに広がる
+            maxWidth: "400px", // 最大幅を設定
+          }}
+        >
+          準備できた！
+        </Button>
+      </div>
     );
   }
 

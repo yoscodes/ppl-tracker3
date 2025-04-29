@@ -132,7 +132,7 @@ function LegPage() {
           variant="contained" // ボタンのデザイン
           onClick={handleReload}
           sx={{
-            backgroundColor: "#4CAF50", // グリーンでポジティブな印象
+            backgroundColor: "	#F58220", // グリーンでポジティブな印象
             color: "white",
             padding: "12px 24px",
             fontSize: "18px",
@@ -141,7 +141,7 @@ function LegPage() {
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // 軽い影をつけて浮き上がる感じ
             transition: "all 0.3s ease",
             "&:hover": {
-              backgroundColor: "#45a049", // ホバー時に色を少し変化
+              backgroundColor: "#E15A28", // ホバー時に色を少し変化
               transform: "scale(1.05)", // ホバー時に少し大きくなる
               boxShadow: "0 8px 12px rgba(0, 0, 0, 0.2)", // ホバー時に影を強く
             },
