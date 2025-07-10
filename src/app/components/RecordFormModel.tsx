@@ -101,9 +101,21 @@ const RecordFormModal = ({ open, onClose, onSubmit, categories }: Props) => {
   }, [open]);
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog 
+      open={open} 
+      onClose={onClose} 
+      fullWidth 
+      maxWidth="sm"
+      PaperProps={{
+        sx: {
+          margin: { xs: 2, sm: 'auto' },
+          width: { xs: 'calc(100% - 32px)', sm: 'auto' },
+          maxHeight: { xs: 'calc(100% - 64px)', sm: '90vh' }
+        }
+      }}
+    >
       <DialogTitle>トレーニング記録の追加</DialogTitle>
-      <DialogContent className="space-y-4 mt-2">
+      <DialogContent className="space-y-4 mt-2" sx={{ padding: { xs: 2, sm: 3 } }}>
         <TextField
           label="日付"
           type="date"
@@ -130,37 +142,46 @@ const RecordFormModal = ({ open, onClose, onSubmit, categories }: Props) => {
         </TextField>
 
         {[0, 1, 2, 3, 4, 5].map((i) => (
-          <div key={i} className="flex space-x-2 items-end">
-            <TextField
-              label={`セット${i + 1} 重量 (kg)`}
-              type="number"
-              fullWidth
-              value={weights[i]}
-              onChange={(e) => handleWeightChange(i, e.target.value)}
-              InputProps={{ inputProps: { min: 0 } }}
-              InputLabelProps={{ shrink: true }}
-            />
+          <div key={i} className="space-y-3">
+            <div className="text-sm font-medium text-gray-700">
+              セット{i + 1}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <TextField
+                label="重量 (kg)"
+                type="number"
+                fullWidth
+                value={weights[i]}
+                onChange={(e) => handleWeightChange(i, e.target.value)}
+                InputProps={{ inputProps: { min: 0 } }}
+                InputLabelProps={{ shrink: true }}
+                size="small"
+              />
 
-            <TextField
-              label={`セット${i + 1} 回数`}
-              select
-              fullWidth
-              value={reps[i]}
-              onChange={(e) => handleRepsChange(i, e.target.value)}
-              InputLabelProps={{ shrink: true }}
-            >
-              {Array.from({ length: 30 }, (_, j) => j + 1).map((rep) => (
-                <MenuItem key={rep} value={rep}>
-                  {rep} 回
-                </MenuItem>
-              ))}
-            </TextField>
+              <TextField
+                label="回数"
+                select
+                fullWidth
+                value={reps[i]}
+                onChange={(e) => handleRepsChange(i, e.target.value)}
+                InputLabelProps={{ shrink: true }}
+                size="small"
+              >
+                {Array.from({ length: 30 }, (_, j) => j + 1).map((rep) => (
+                  <MenuItem key={rep} value={rep}>
+                    {rep} 回
+                  </MenuItem>
+                ))}
+              </TextField>
+            </div>
           </div>
         ))}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose}>キャンセル</Button>
-        <Button variant="contained" onClick={handleSubmit}>
+      <DialogActions sx={{ padding: { xs: 2, sm: 3 }, gap: 1 }}>
+        <Button onClick={onClose} variant="outlined" fullWidth sx={{ display: { xs: 'block', sm: 'inline' } }}>
+          キャンセル
+        </Button>
+        <Button variant="contained" onClick={handleSubmit} fullWidth sx={{ display: { xs: 'block', sm: 'inline' } }}>
           登録
         </Button>
       </DialogActions>
